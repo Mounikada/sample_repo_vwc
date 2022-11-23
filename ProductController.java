@@ -52,6 +52,16 @@ public ResponseEntity<List<Product1>> getAllProducts(@RequestParam String name) 
 }
 
 //Pathvariable
+/*RQ_1361-Code changes -Start*/
+@GetMapping("/product/{Id}")
+public ResponseEntity < Product1 > getItemsById
+(@PathVariable(value = "id") Integer ProductsId)
+throws ResourceNotFoundException{
+	Product1 product = productRepository.findById(ProductsId)
+        .orElseThrow(() -> new ResourceNotFoundException("Your Entered Item Number is not available in Database,Could you please try with other Item Number :: " + ProductsId));
+    return ResponseEntity.ok().body(product);
+/*RQ_1361-Code changes -End*/
+
 
 @GetMapping("/product/{Id}")
 public ResponseEntity < Product1 > getItemsById
